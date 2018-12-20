@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const cartProducts = mongoose.model('cartProducts',
+const cart_products = mongoose.model('cart_products',
  {
       product_id: String,
       quantity: Number,
@@ -8,4 +8,4 @@ const cartProducts = mongoose.model('cartProducts',
       cart_id: String
  });
 
- module.exports=cartProducts;
+ module.exports=cart_products;
