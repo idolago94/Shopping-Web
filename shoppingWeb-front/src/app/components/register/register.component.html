@@ -1,13 +1,11 @@
 <mat-horizontal-stepper #stepper>
   <mat-step [stepControl]="firstFormGroup">
     <form [formGroup]="personalDetailsForm">
+        <ngb-alert *ngIf="registerError" type="danger" [dismissible]="flase" >{{ registerError.message }}</ngb-alert>
       <ng-template matStepLabel>Fill out your details</ng-template>
       <div>
         <mat-form-field>
           <input matInput placeholder="ID" formControlName="id" required>
-          <mat-error *ngIf="personalDetailsForm.controls.id.hasError('id_taken')">
-            {{ personalDetailsForm.controls.id.errors.id_taken }}
-          </mat-error>
           <mat-error *ngIf="personalDetailsForm.controls.id.hasError('required')">
             ID is <strong>required</strong>
           </mat-error>

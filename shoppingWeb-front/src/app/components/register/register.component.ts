@@ -16,7 +16,7 @@ export class RegisterComponent implements OnInit {
   constructor( private userService:UsersService, private router: Router ) { }
 
   allUsers = [];
-  
+  registerError: string;
   allCity = ['Tel Aviv', 'Ashdod', 'Herzilya', 'Qiryat Ono', 'Yehud', 'Ramat Gan', 'Jerusalem'];
 
   personalDetailsForm: FormGroup = new FormGroup({
@@ -42,7 +42,7 @@ export class RegisterComponent implements OnInit {
     delete newUser.confirm_password;
     this.userService.addUser(newUser).subscribe((response) => {
       if(response.error){
-        this.personalDetailsForm.controls.id.setErrors({id_taken: response.error});
+        this.registerError = response.error;
         stepper.reset();
       }
       else{
@@ -50,5 +50,4 @@ export class RegisterComponent implements OnInit {
       }
     })
   }
-
 }

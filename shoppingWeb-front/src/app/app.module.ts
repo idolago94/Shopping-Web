@@ -11,6 +11,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatSelectModule} from '@angular/material/select';
 import {MatCardModule} from '@angular/material/card';
 import { HttpClientModule } from '@angular/common/http';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 import { AppComponent } from './app.component';
 import { RegisterComponent } from './components/register/register.component';
@@ -25,6 +26,7 @@ import { HomeComponent } from './components/home/home.component';
   imports: [
     BrowserModule,
     HttpClientModule,
+    NgbModule,
 
     // angular material components
     BrowserAnimationsModule,

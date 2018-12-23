@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var passport = require('passport');
 var Users = require('../models/users-model');
 
 async function checkIdExist (req, res, next) {
@@ -8,7 +9,7 @@ async function checkIdExist (req, res, next) {
   if(!response) next();
   else {
     var err = new Error("id allready taken");
-     res.json({error: 'id allready taken'})  //Error, trying to access unauthorized page!
+     res.json({error: {name: 'IdExist', message: 'A user with the given id is already registered'}});
   }
 }
 
@@ -46,9 +47,27 @@ router.get('/bycity/:city',async function(req, res, next) {
 
 // add new user
 router.post('/', checkIdExist, async function(req, res, next) {
-  let newUser = new Users(req.body);
-  let response = await newUser.save();
-  res.json(response);
+  // let newUser = new Users(req.body);
+  // let response = await newUser.save();
+  // res.json(response);
+
+
+  console.log('user register');
+  Users.register( new Users({ 
+    firstName:req.body.firstName,
+    lastName:req.body.lastName,
+    username: req.body.email,
+    id: req.body.id,
+    authority: req.body.authority,
+    city: req.body.city,
+    adress: req.body.adress
+   }), req.body.password, (err,user) => {
+    if(err) res.json({error: err});
+    console.log(err);
+    passport.authenticate('local')(req, res, () => {
+      res.json(user);
+    })
+  });
 });
 
 // update user by id
