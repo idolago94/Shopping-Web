@@ -51,8 +51,4 @@ export class RegisterComponent implements OnInit {
     })
   }
 
-  debug() {
-    debugger;
-  }
-
 }
