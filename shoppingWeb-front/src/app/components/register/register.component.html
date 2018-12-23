@@ -5,22 +5,37 @@
       <div>
         <mat-form-field>
           <input matInput placeholder="ID" formControlName="id" required>
-          <mat-error *ngIf='personalDetailsForm.controls.id.errors' >
-            <mat-error *ngIf='personalDetailsForm.controls.id.errors.id_taken' >{{ personalDetailsForm.controls.id.errors.id_taken }}</mat-error>
+          <mat-error *ngIf="personalDetailsForm.controls.id.hasError('id_taken')">
+            {{ personalDetailsForm.controls.id.errors.id_taken }}
+          </mat-error>
+          <mat-error *ngIf="personalDetailsForm.controls.id.hasError('required')">
+            ID is <strong>required</strong>
           </mat-error>
         </mat-form-field>
       </div>
       <div>
         <mat-form-field>
           <input matInput type="email" placeholder="email" formControlName="email" required>
+          <mat-error *ngIf="personalDetailsForm.controls.email.hasError('required')">
+            Email is <strong>required</strong>
+          </mat-error>
+          <mat-error *ngIf="personalDetailsForm.controls.email.hasError('email')">
+            Please enter a valid email address
+          </mat-error>
         </mat-form-field>
       </div>
       <div>
         <mat-form-field>
           <input matInput type="password" placeholder="password" formControlName="password" required>
+          <mat-error *ngIf="personalDetailsForm.controls.password.hasError('required')">
+            Password is <strong>required</strong>
+          </mat-error>
         </mat-form-field>
         <mat-form-field>
           <input matInput type="password" placeholder="confirm password" formControlName="confirm_password" required>
+          <mat-error *ngIf="personalDetailsForm.controls.password.hasError('required')">
+            Password Confirm is <strong>required</strong>
+          </mat-error>
         </mat-form-field>
       </div>
       <div>
@@ -38,19 +53,31 @@
               {{city}}
             </mat-option>
           </mat-select>
+          <mat-error *ngIf="adressDetailsForm.controls.city.hasError('required')">
+            City is <strong>required</strong>
+          </mat-error>
         </mat-form-field>
       </div>
       <div>
           <mat-form-field>
             <input matInput placeholder="Adress" formControlName="adress" required>
+            <mat-error *ngIf="adressDetailsForm.controls.adress.hasError('required')">
+              Adress is <strong>required</strong>
+            </mat-error>
           </mat-form-field>
       </div>
       <div>
           <mat-form-field>
             <input matInput placeholder="First name" formControlName="firstName" required>
+            <mat-error *ngIf="adressDetailsForm.controls.firstName.hasError('required')">
+              First Name is <strong>required</strong>
+            </mat-error>
           </mat-form-field>
           <mat-form-field>
             <input matInput placeholder="Last Name" formControlName="lastName" required>
+            <mat-error *ngIf="adressDetailsForm.controls.lastName.hasError('required')">
+              Last Name is <strong>required</strong>
+            </mat-error>
           </mat-form-field>          
       </div>
       <div>
