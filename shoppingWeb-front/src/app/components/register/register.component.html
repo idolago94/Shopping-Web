@@ -4,7 +4,8 @@
       <ng-template matStepLabel>Fill out your details</ng-template>
       <div>
         <mat-form-field>
-          <input matInput placeholder="ID" formControlName="id"  required>
+          <input matInput placeholder="ID" formControlName="id" required>
+          <mat-error *ngIf='personalDetailsForm.controls.id.errors' >{{ personalDetailsForm.controls.id.errors }}</mat-error>
         </mat-form-field>
       </div>
       <div>
@@ -51,8 +52,8 @@
           </mat-form-field>          
       </div>
       <div>
-        <button mat-button matStepperPrevious [disabled]='!adressDetailsForm.valid' >Back</button>
-        <button mat-button matStepperNext >Next</button>
+        <button mat-button matStepperPrevious >Back</button>
+        <button mat-button matStepperNext [disabled]='!adressDetailsForm.valid' >Next</button>
       </div>
     </form>
   </mat-step>
@@ -69,7 +70,7 @@
       </mat-card>
     <div>
       <button mat-button matStepperPrevious>Back</button>
-      <button mat-button (click)="register()">Register</button>
+      <button mat-button (click)="register(stepper)">Register</button>
     </div>
   </mat-step>
 </mat-horizontal-stepper>

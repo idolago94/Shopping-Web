@@ -2,6 +2,18 @@ var express = require('express');
 var router = express.Router();
 var Users = require('../models/users-model');
 
+async function checkIdExist (req, res, next) {
+  let response = await Users.findOne({ id:req.body.id });
+  console.log(response);
+  if(!response) next();
+  else {
+    var err = new Error("id allready taken");
+     res.json({error: 'id allready taken'})  //Error, trying to access unauthorized page!
+  }
+}
+
+
+
 // get all
 router.get('/',async function(req, res, next) {
   let allUsers= await Users.find({});
@@ -33,7 +45,7 @@ router.get('/bycity/:city',async function(req, res, next) {
 });
 
 // add new user
-router.post('/',async function(req, res, next) {
+router.post('/', checkIdExist, async function(req, res, next) {
   let newUser = new Users(req.body);
   let response = await newUser.save();
   res.json(response);
