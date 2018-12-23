@@ -1,8 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators, FormControl, AbstractControl} from '@angular/forms';
+import { FormGroup, Validators, FormControl, AbstractControl} from '@angular/forms';
 import { UsersService } from 'src/app/services/users.service'; 
 import {Router} from "@angular/router"; 
 import { MatStepper } from '@angular/material';
+
+// password validation
+function passwordConfirming(c): any {
+  if(!c || !c.parent) return ;
+
+  if(c.parent.controls.password.value!=c.value){
+    return { invalid: true };
+  }
+}
+
 
 
 @Component({
@@ -23,14 +33,21 @@ export class RegisterComponent implements OnInit {
     id: new FormControl(null, [Validators.required]),
     email: new FormControl(null, [Validators.required, Validators.email]),
     password: new FormControl(null, [Validators.required]),
-    confirm_password: new FormControl(null, [Validators.required])
-  });
+    confirm_password: new FormControl(null, [Validators.required, passwordConfirming])
+  },);
   adressDetailsForm: FormGroup = new FormGroup({
     city: new FormControl(null, [Validators.required]),
     adress: new FormControl(null, [Validators.required]),
     firstName: new FormControl(null, [Validators.required]),
     lastName: new FormControl(null, [Validators.required]),
   });
+
+  checkPasswords(group: FormGroup) { // here we have the 'passwords' group
+  let pass = group.controls.password.value;
+  let confirmPass = group.controls.confirm_password.value;
+
+  return pass === confirmPass ? null : { notSame: true }     
+}
 
 
   ngOnInit() {
