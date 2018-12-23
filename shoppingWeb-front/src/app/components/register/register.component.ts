@@ -42,13 +42,17 @@ export class RegisterComponent implements OnInit {
     delete newUser.confirm_password;
     this.userService.addUser(newUser).subscribe((response) => {
       if(response.error){
-        this.personalDetailsForm.controls.id.setErrors(response.error);
+        this.personalDetailsForm.controls.id.setErrors({id_taken: response.error});
         stepper.reset();
       }
       else{
         this.router.navigate([''])
       }
     })
+  }
+
+  debug() {
+    debugger;
   }
 
 }

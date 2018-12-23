@@ -5,7 +5,9 @@
       <div>
         <mat-form-field>
           <input matInput placeholder="ID" formControlName="id" required>
-          <mat-error *ngIf='personalDetailsForm.controls.id.errors' >{{ personalDetailsForm.controls.id.errors }}</mat-error>
+          <mat-error *ngIf='personalDetailsForm.controls.id.errors' >
+            <mat-error *ngIf='personalDetailsForm.controls.id.errors.id_taken' >{{ personalDetailsForm.controls.id.errors.id_taken }}</mat-error>
+          </mat-error>
         </mat-form-field>
       </div>
       <div>
@@ -74,3 +76,4 @@
     </div>
   </mat-step>
 </mat-horizontal-stepper>
+<input type="button" (click)="debug()" />
