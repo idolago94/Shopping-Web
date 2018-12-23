@@ -17,6 +17,8 @@ export class UsersService {
 
   constructor( private http:HttpClient ) { }
 
+  currentUser:any;
+
   getAll():Observable<any> {
     return <Observable<any>> this.http.get(this.url);
   }
@@ -26,7 +28,11 @@ export class UsersService {
   }
 
   addUser(newUser):Observable<any> {
-    return <Observable<any>> this.http.post(this.url, newUser, this.httpOptions );
+    return <Observable<any>> this.http.post( this.url, newUser, this.httpOptions );
+  }
+
+  login(logindetails): Observable<any> {
+    return <Observable<any>> this.http.post( this.url+'/login', logindetails, this.httpOptions );
   }
 
 }

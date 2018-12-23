@@ -45,14 +45,8 @@ router.get('/bycity/:city',async function(req, res, next) {
   res.json(allAdmins);
 });
 
-// add new user
+// add new user - register
 router.post('/', checkIdExist, async function(req, res, next) {
-  // let newUser = new Users(req.body);
-  // let response = await newUser.save();
-  // res.json(response);
-
-
-  console.log('user register');
   Users.register( new Users({ 
     firstName:req.body.firstName,
     lastName:req.body.lastName,
@@ -63,12 +57,16 @@ router.post('/', checkIdExist, async function(req, res, next) {
     adress: req.body.adress
    }), req.body.password, (err,user) => {
     if(err) res.json({error: err});
-    console.log(err);
     passport.authenticate('local')(req, res, () => {
       res.json(user);
     })
   });
 });
+
+// user login
+router.post('/login', passport.authenticate('local'), (req, res) => {
+  res.json({user: req.user});
+})
 
 // update user by id
 router.put('/:id',async function(req, res, next) {

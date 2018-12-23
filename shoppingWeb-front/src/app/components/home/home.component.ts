@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, Validators, FormControl, AbstractControl} from '@angular/forms';
+import { UsersService } from 'src/app/services/users.service';
 
 @Component({
   selector: 'app-home',
@@ -7,9 +9,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  loginForm: FormGroup = new FormGroup({
+    username: new FormControl(null, [Validators.required, Validators.email]),
+    password: new FormControl(null, [Validators.required])
+  });
+
+  constructor( private userService:UsersService ) { }
 
   ngOnInit() {
+
   }
 
+  login() {
+    this.userService.login(this.loginForm.value).subscribe((data) => {
+      this.userService.currentUser = data.user;
+      
+    })
+  }
 }

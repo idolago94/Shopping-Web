@@ -34,7 +34,7 @@ export class RegisterComponent implements OnInit {
     email: new FormControl(null, [Validators.required, Validators.email]),
     password: new FormControl(null, [Validators.required]),
     confirm_password: new FormControl(null, [Validators.required, passwordConfirming])
-  },);
+  });
   adressDetailsForm: FormGroup = new FormGroup({
     city: new FormControl(null, [Validators.required]),
     adress: new FormControl(null, [Validators.required]),
@@ -63,7 +63,7 @@ export class RegisterComponent implements OnInit {
         stepper.reset();
       }
       else{
-        this.router.navigate([''])
+        this.router.navigate(['']);
       }
     })
   }

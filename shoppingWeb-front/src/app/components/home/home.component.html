@@ -1,4 +1,25 @@
-<p>
-  home works!
-</p>
-<a href='/register' >go to sign up</a>
+<mat-grid-list cols="3">
+  <mat-grid-tile>
+    <ngb-alert *ngIf="userService.currentUser" type="primary" [dismissible]="flase" >{{ userService.currentUser.username }}</ngb-alert>
+    <form [formGroup]="loginForm" method="POST" action="/login">
+      <div>
+        <mat-form-field>
+          <input matInput formControlName="username" placeholder="email:" />
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field>
+          <input matInput type="password" formControlName="password" placeholder="password:" />
+        </mat-form-field>
+      </div>
+      <button mat-raised-button (click)="login()" >Login</button>
+      <a mat-button color="primary" href="/register" >not register yet?</a>
+    </form>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    ABOUT 
+  </mat-grid-tile>
+  <mat-grid-tile>
+    C
+  </mat-grid-tile>
+</mat-grid-list>
