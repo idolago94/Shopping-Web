@@ -14,6 +14,8 @@ export class HomeComponent implements OnInit {
     password: new FormControl(null, [Validators.required])
   });
 
+  loginAlert: string;
+
   constructor( private userService:UsersService ) { }
 
   ngOnInit() {
@@ -21,10 +23,14 @@ export class HomeComponent implements OnInit {
   }
 
   login() {
-    debugger;
     this.userService.login(this.loginForm.value).subscribe((data) => {
-      debugger;
-      this.userService.currentUser = data.user;
+      if(data.failedAuthenticate){
+        this.loginAlert = data.failedAuthenticate;
+      }
+      else {
+        this.userService.currentUser = data.user;
+      }
+      
     })
   }
 }

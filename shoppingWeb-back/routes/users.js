@@ -62,9 +62,22 @@ router.post('/', checkIdExist, async function(req, res, next) {
 });
 
 // user login
-router.post('/login', passport.authenticate('local'), (req, res) => {
-  res.json({user: req.user});
-})
+// router.post('/login', passport.authenticate('local'), (req, res) => {
+//   res.json({user: req.user});
+// })
+
+router.post('/login', function(req, res, next) {
+  passport.authenticate('local', function(err, user, info) {
+    if (err) { return res.json(err); }
+    if (!user) { return res.json({failedAuthenticate: 'Invalid email or password'}); }
+    req.logIn(user, function(err) {
+      if (err) { return res.json(err); }
+      return res.json(user);
+    });
+  })(req, res, next);
+});
+
+
 
 // update user by id
 router.put('/:id',async function(req, res, next) {

@@ -1,6 +1,6 @@
 <mat-grid-list cols="3">
   <mat-grid-tile>
-    <ngb-alert *ngIf="userService.currentUser" type="primary" [dismissible]="flase" >{{ userService.currentUser.username }}</ngb-alert>
+    <ngb-alert *ngIf="loginAlert" type="danger" [dismissible]="flase" >{{ loginAlert }}</ngb-alert>
     <form [formGroup]="loginForm" method="POST" action="/login">
       <div>
         <mat-form-field>
