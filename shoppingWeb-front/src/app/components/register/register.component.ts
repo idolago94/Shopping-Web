@@ -55,7 +55,7 @@ export class RegisterComponent implements OnInit {
   }
 
   register(stepper: MatStepper) {
-    let newUser = Object.assign({}, this.personalDetailsForm.value, this.adressDetailsForm.value, {authority:'user'});
+    let newUser = Object.assign({}, this.personalDetailsForm.value, this.adressDetailsForm.value);
     delete newUser.confirm_password;
     this.userService.addUser(newUser).subscribe((response) => {
       if(response.error){

@@ -22,7 +22,7 @@ var passportLocalMongoose = require('passport-local-mongoose');
 var Users = new Schema({
       firstName: String,
       lastName: String,
-      email: String,
+      username: String,
       id: String,
       password: String,
       authority: String,

@@ -21,9 +21,10 @@ export class HomeComponent implements OnInit {
   }
 
   login() {
+    debugger;
     this.userService.login(this.loginForm.value).subscribe((data) => {
+      debugger;
       this.userService.currentUser = data.user;
-      
     })
   }
 }

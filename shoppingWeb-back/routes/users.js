@@ -52,14 +52,12 @@ router.post('/', checkIdExist, async function(req, res, next) {
     lastName:req.body.lastName,
     username: req.body.email,
     id: req.body.id,
-    authority: req.body.authority,
+    authority: 'user',
     city: req.body.city,
     adress: req.body.adress
    }), req.body.password, (err,user) => {
     if(err) res.json({error: err});
-    passport.authenticate('local')(req, res, () => {
-      res.json(user);
-    })
+    res.json(user);
   });
 });
 
