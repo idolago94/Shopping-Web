@@ -14,7 +14,6 @@ async function checkIdExist (req, res, next) {
 }
 
 
-
 // get all
 router.get('/',async function(req, res, next) {
   let allUsers= await Users.find({});
@@ -40,7 +39,7 @@ router.get('/:id',async function(req, res, next) {
 });
 
 // get by city
-router.get('/bycity/:city',async function(req, res, next) {
+router.get('/bycity/:city', async function(req, res, next) {
   let allAdmins= await Users.find({ city: req.params.city });
   res.json(allAdmins);
 });
@@ -62,10 +61,6 @@ router.post('/', checkIdExist, async function(req, res, next) {
 });
 
 // user login
-// router.post('/login', passport.authenticate('local'), (req, res) => {
-//   res.json({user: req.user});
-// })
-
 router.post('/login', function(req, res, next) {
   passport.authenticate('local', function(err, user, info) {
     if (err) { return res.json(err); }
@@ -77,7 +72,11 @@ router.post('/login', function(req, res, next) {
   })(req, res, next);
 });
 
-
+// user logout
+router.get('/logout', function (req, res) {
+  req.logout();
+  res.json({logoutSuccedd: true});
+});
 
 // update user by id
 router.put('/:id',async function(req, res, next) {

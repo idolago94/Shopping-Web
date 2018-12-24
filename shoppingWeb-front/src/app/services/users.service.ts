@@ -14,10 +14,11 @@ export class UsersService {
   };
 
   url:string = 'http://localhost:3000/users';
+  currentUser:any;
 
   constructor( private http:HttpClient ) { }
 
-  currentUser:any;
+  
 
   getAll():Observable<any> {
     return <Observable<any>> this.http.get(this.url);
@@ -33,6 +34,10 @@ export class UsersService {
 
   login(logindetails): Observable<any> {
     return <Observable<any>> this.http.post( this.url+'/login', logindetails, this.httpOptions );
+  }
+
+  logout(): Observable<any> {
+    return <Observable<any>> this.http.get( this.url+'/logout' );
   }
 
 }

@@ -28,9 +28,16 @@ export class HomeComponent implements OnInit {
         this.loginAlert = data.failedAuthenticate;
       }
       else {
-        this.userService.currentUser = data.user;
+        this.loginAlert = null;
+        this.userService.currentUser = data;
       }
-      
+    });
+  }
+
+  logout() {
+    this.userService.logout().subscribe((data) => {
+      this.userService.currentUser = null;
+      this.loginForm.reset();
     })
   }
 }

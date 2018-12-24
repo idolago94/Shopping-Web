@@ -1,20 +1,29 @@
 <mat-grid-list cols="3">
   <mat-grid-tile>
-    <ngb-alert *ngIf="loginAlert" type="danger" [dismissible]="flase" >{{ loginAlert }}</ngb-alert>
-    <form [formGroup]="loginForm" method="POST" action="/login">
-      <div>
-        <mat-form-field>
-          <input matInput formControlName="username" placeholder="email:" />
-        </mat-form-field>
-      </div>
-      <div>
-        <mat-form-field>
-          <input matInput type="password" formControlName="password" placeholder="password:" />
-        </mat-form-field>
-      </div>
-      <button mat-raised-button (click)="login()" >Login</button>
-      <a mat-button color="primary" href="/register" >not register yet?</a>
-    </form>
+    <button class="form-control" mat-raised-button color="accent" [disabled]="!this.userService.currentUser" >Start Shopping</button>
+    <div *ngIf="!this.userService.currentUser" >
+      <ngb-alert *ngIf="loginAlert" type="danger" [dismissible]="false" >{{ loginAlert }}</ngb-alert>
+      <form [formGroup]="loginForm" method="POST" action="/login">
+        <div>
+          <mat-form-field>
+            <input matInput formControlName="username" placeholder="email:" />
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field>
+            <input matInput type="password" formControlName="password" placeholder="password:" />
+          </mat-form-field>
+        </div>
+        <button mat-raised-button (click)="login()" >Login</button>
+        <a mat-button color="primary" href="/register" >not register yet?</a>
+      </form>
+    </div>
+    <div *ngIf="this.userService.currentUser" >
+      <h4>
+        Welcome back {{ this.userService.currentUser.firstName }} {{ this.userService.currentUser.lastName }}
+      </h4>
+      <b (click)="logout()">log out</b>
+    </div>
   </mat-grid-tile>
   <mat-grid-tile>
     ABOUT 
