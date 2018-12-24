@@ -18,7 +18,6 @@ export class UsersService {
 
   constructor( private http:HttpClient ) { }
 
-  
 
   getAll():Observable<any> {
     return <Observable<any>> this.http.get(this.url);

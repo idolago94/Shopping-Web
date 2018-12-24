@@ -4,7 +4,6 @@ const cart_products = mongoose.model('cart_products',
  {
       product_id: String,
       quantity: Number,
-      total_price: Number,
       cart_id: String
  });
 

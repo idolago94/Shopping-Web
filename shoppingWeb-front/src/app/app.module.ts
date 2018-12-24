@@ -16,12 +16,22 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { AppComponent } from './app.component';
 import { RegisterComponent } from './components/register/register.component';
 import { HomeComponent } from './components/home/home.component';
+import { StoreComponent } from './components/store/store.component';
+import { CartComponent } from './components/cart/cart.component';
+import { AllproductsComponent } from './components/allproducts/allproducts.component';
+import { CartProductComponent } from './components/cart-product/cart-product.component';
+import { SingleProductComponent } from './components/single-product/single-product.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     RegisterComponent,
-    HomeComponent
+    HomeComponent,
+    StoreComponent,
+    CartComponent,
+    AllproductsComponent,
+    CartProductComponent,
+    SingleProductComponent
   ],
   imports: [
     BrowserModule,
@@ -41,7 +51,8 @@ import { HomeComponent } from './components/home/home.component';
     ReactiveFormsModule,
     RouterModule.forRoot([
       { path:"", component: HomeComponent },
-      { path:"register", component: RegisterComponent }
+      { path:"register", component: RegisterComponent },
+      { path:"store", component: StoreComponent }
     ])
   ],
   providers: [],

@@ -1,0 +1,10 @@
+<mat-card>
+  <img mat-card-image [src]="data.picture" height="50" width="50">
+  <mat-card-content>
+    <b>{{ data.name }}</b>
+    <p>{{ data.price | currency:'ILS' }}</p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button>ADD TO CART</button>
+  </mat-card-actions>
+</mat-card>

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormControl, AbstractControl} from '@angular/forms';
 import { UsersService } from 'src/app/services/users.service';
+import {Router} from "@angular/router"; 
+import { CartService } from 'src/app/services/cart.service';
 
 @Component({
   selector: 'app-home',
@@ -15,8 +17,9 @@ export class HomeComponent implements OnInit {
   });
 
   loginAlert: string;
+  userCart: any;
 
-  constructor( private userService:UsersService ) { }
+  constructor( private userService:UsersService, private router: Router, private cartService:CartService ) { }
 
   ngOnInit() {
 
@@ -30,6 +33,9 @@ export class HomeComponent implements OnInit {
       else {
         this.loginAlert = null;
         this.userService.currentUser = data;
+        this.cartService.getByUserId(data.id).subscribe((data) => {
+          this.userCart = data;
+        })
       }
     });
   }

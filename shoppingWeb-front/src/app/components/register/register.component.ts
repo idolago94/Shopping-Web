@@ -42,13 +42,6 @@ export class RegisterComponent implements OnInit {
     lastName: new FormControl(null, [Validators.required]),
   });
 
-  checkPasswords(group: FormGroup) { // here we have the 'passwords' group
-  let pass = group.controls.password.value;
-  let confirmPass = group.controls.confirm_password.value;
-
-  return pass === confirmPass ? null : { notSame: true }     
-}
-
 
   ngOnInit() {
 
@@ -63,6 +56,7 @@ export class RegisterComponent implements OnInit {
         stepper.reset();
       }
       else{
+        this.userService.currentUser = response;
         this.router.navigate(['']);
       }
     })

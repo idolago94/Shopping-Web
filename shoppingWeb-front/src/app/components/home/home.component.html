@@ -1,6 +1,6 @@
 <mat-grid-list cols="3">
   <mat-grid-tile>
-    <button class="form-control" mat-raised-button color="accent" [disabled]="!this.userService.currentUser" >Start Shopping</button>
+    <button class="form-control" mat-raised-button color="accent" [disabled]="!this.userService.currentUser" (click)="router.navigate(['store'])" >Start Shopping</button>
     <div *ngIf="!this.userService.currentUser" >
       <ngb-alert *ngIf="loginAlert" type="danger" [dismissible]="false" >{{ loginAlert }}</ngb-alert>
       <form [formGroup]="loginForm" method="POST" action="/login">
