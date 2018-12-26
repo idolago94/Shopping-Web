@@ -12,6 +12,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatCardModule} from '@angular/material/card';
 import { HttpClientModule } from '@angular/common/http';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {MatDialogModule} from '@angular/material/dialog';
 
 import { AppComponent } from './app.component';
 import { RegisterComponent } from './components/register/register.component';
@@ -47,6 +48,7 @@ import { SingleProductComponent } from './components/single-product/single-produ
     MatButtonModule,
     MatSelectModule,
     MatCardModule,
+    MatDialogModule,
 
     ReactiveFormsModule,
     RouterModule.forRoot([

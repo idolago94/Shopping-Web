@@ -1,5 +1,5 @@
 <mat-card>
+  <img [src]="productData.picture" height="40" />
   <b>{{ productData.name }}</b>
   <span> {{ productData.price | currency:'ILS' }} X {{ details.quantity }} = {{ productData.price*details.quantity | currency:'ILS' }}</span>
-  <img [src]="productData.picture" height="40" />
 </mat-card>

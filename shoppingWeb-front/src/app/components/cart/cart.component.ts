@@ -12,18 +12,22 @@ export class CartComponent implements OnInit {
 
   constructor( private cartService:CartService, private userService:UsersService, private cartProductService:CartProductService ) { }
 
-  userCart = {
-    details: '',
-    products:''
-  };
-
   ngOnInit() {
     this.cartService.getByUserId(this.userService.currentUser.id).subscribe((data) => {
-      this.userCart.details = data;
-      this.cartProductService.getByCart(data[0]._id).subscribe((data) => {
-        this.userCart.products = data;
-      })
+      if(data.length>0) {
+        this.cartService.openCart = data[0];
+        this.getCartProducts(data[0]._id);
+      }
+    });
+    this.cartService.productAddedToCart.subscribe(() => {
+      this.getCartProducts(this.cartService.openCart._id);
     })
+  }
+
+  getCartProducts(cartID) {
+    this.cartProductService.getByCart(cartID).subscribe((data) => {
+        this.cartProductService.openCartProducts = data;
+      })
   }
 
 }

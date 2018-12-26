@@ -2,4 +2,4 @@
     My Cart
     <img class="minimize-icon" src='https://cdn3.iconfinder.com/data/icons/line/36/subtract-512.png' (click)="this.cartService.minimize=true" height="30"/>
 </h3>
-<app-cart-product *ngFor="let p of userCart.products" [details]="p"></app-cart-product>
+<app-cart-product *ngFor="let p of this.cartProductService.openCartProducts" [details]="p"></app-cart-product>

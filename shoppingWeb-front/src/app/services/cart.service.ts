@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +17,11 @@ export class CartService {
 
   minimize:boolean = false;
 
+  openCart:any;
+
   constructor( private http:HttpClient ) { }
+
+  productAddedToCart = new Subject();
 
   getAll():Observable<any> {
     return <Observable<any>> this.http.get(this.url);
