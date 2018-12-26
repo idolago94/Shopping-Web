@@ -3,6 +3,7 @@ import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { FormControl, FormGroup } from '@angular/forms';
 import { CartProductService } from 'src/app/services/cart-product.service';
 import { CartService } from 'src/app/services/cart.service';
+import { UsersService } from 'src/app/services/users.service';
 
 @Component({
   selector: 'app-single-product',
@@ -17,7 +18,7 @@ export class SingleProductComponent implements OnInit {
     quantity: new FormControl()
   });
 
-  constructor( private modalService: NgbModal, private cartProductService:CartProductService, private cartService:CartService ) { }
+  constructor( private userService:UsersService, private modalService: NgbModal, private cartProductService:CartProductService, private cartService:CartService ) { }
 
   ngOnInit() {
   }
@@ -33,28 +34,47 @@ export class SingleProductComponent implements OnInit {
 
   addToCart() {
     if(this.quantityForm.controls.quantity.value>0){
-      let newProduct = this.cartProductService.openCartProducts.find((cartProduct) => {
-        return cartProduct.product_id==this.data._id;
-      });
-      // product allready exist in cart
-      if(newProduct) {
-        newProduct.quantity = newProduct.quantity + this.quantityForm.controls.quantity.value;
-        this.cartProductService.updateCartProduct(newProduct._id, newProduct).subscribe((data) => {
-          this.quantityForm.reset();
-          this.cartService.productAddedToCart.next();
-        })
-      }
-      // product not exist in cart
-      else {
-        let newCartProduct = {
-        product_id: this.data._id,
-        quantity: this.quantityForm.controls.quantity.value,
-        cart_id: this.cartService.openCart._id
-        };
-        this.cartProductService.addCartProduct(newCartProduct).subscribe((data) => {
-          this.quantityForm.reset();
-          this.cartService.productAddedToCart.next();
+      // open cart existing
+      if(this.cartService.openCart){
+        let newProduct = this.cartProductService.openCartProducts.find((cartProduct) => {
+          return cartProduct.product_id==this.data._id;
         });
+        // product allready exist in cart
+        if(newProduct) {
+          newProduct.quantity = newProduct.quantity + this.quantityForm.controls.quantity.value;
+          this.cartProductService.updateCartProduct(newProduct._id, newProduct).subscribe((data) => {
+            this.quantityForm.reset();
+            this.cartService.productAddedToCart.next();
+          })
+        }
+        // product not exist in cart
+        else {
+          let newCartProduct = {
+          product_id: this.data._id,
+          quantity: this.quantityForm.controls.quantity.value,
+          cart_id: this.cartService.openCart._id
+          };
+          this.cartProductService.addCartProduct(newCartProduct).subscribe((data) => {
+            this.quantityForm.reset();
+            this.cartService.productAddedToCart.next();
+          });
+        }
+      }
+      // open cart not existing
+      else {
+        let newCart = { user_id: this.userService.currentUser.id, production_date: new Date().toLocaleDateString() };
+        this.cartService.addCart(newCart).subscribe((data) => {
+          this.cartService.openCart = data;
+          let newCartProduct = {
+            product_id: this.data._id,
+            quantity: this.quantityForm.controls.quantity.value,
+            cart_id: data._id
+            };
+          this.cartProductService.addCartProduct(newCartProduct).subscribe((data) => {
+            this.cartService.productAddedToCart.next();
+          })
+        })
+        
       }
     }
   }

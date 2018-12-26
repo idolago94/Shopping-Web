@@ -13,6 +13,7 @@ export class CartComponent implements OnInit {
   constructor( private cartService:CartService, private userService:UsersService, private cartProductService:CartProductService ) { }
 
   ngOnInit() {
+    // check for a open cart of the user
     this.cartService.getByUserId(this.userService.currentUser.id).subscribe((data) => {
       if(data.length>0) {
         this.cartService.openCart = data[0];
