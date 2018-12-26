@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class CartService {
+export class CategoryService {
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -13,9 +13,7 @@ export class CartService {
     })
   };
 
-  url:string = 'http://localhost:3000/carts';
-
-  minimize:boolean = false;
+  url:string = 'http://localhost:3000/categories';
 
   constructor( private http:HttpClient ) { }
 
@@ -27,20 +25,16 @@ export class CartService {
     return <Observable<any>> this.http.get(this.url+'/'+id);
   }
 
-  getByUserId(userID):Observable<any> {
-    return <Observable<any>> this.http.get(this.url+'/byuser/'+userID);
+  addCategory(newCategory):Observable<any> {
+    return <Observable<any>> this.http.post( this.url, newCategory, this.httpOptions );
   }
 
-  addCart(newCart):Observable<any> {
-    return <Observable<any>> this.http.post( this.url, newCart, this.httpOptions );
+  updateCart(categoryID, updatedCategory):Observable<any> {
+    return <Observable<any>> this.http.put(this.url+'/'+categoryID, updatedCategory, this.httpOptions);
   }
 
-  updateCart(cartID, updatedCart):Observable<any> {
-    return <Observable<any>> this.http.put(this.url+'/'+cartID, updatedCart, this.httpOptions);
-  }
-
-  deleteCart(id):Observable<any> {
+  deleteCategory(id):Observable<any> {
     return <Observable<any>> this.http.delete(this.url+'/'+id);
   }
-
+  
 }

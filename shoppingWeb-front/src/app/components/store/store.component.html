@@ -1,8 +1,4 @@
-<mat-grid-list cols="2" >
-  <mat-grid-tile>
-    <app-cart></app-cart>
-  </mat-grid-tile>
-  <mat-grid-tile>
-    <app-allproducts></app-allproducts>
-  </mat-grid-tile>
-</mat-grid-list>
+<div class="row">
+  <app-cart class=col-sm-4 *ngIf="!this.cartService.minimize"></app-cart>
+  <app-allproducts class="col-sm-8"></app-allproducts>
+</div>

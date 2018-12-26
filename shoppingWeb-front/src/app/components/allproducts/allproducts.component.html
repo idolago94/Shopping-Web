@@ -1,6 +1,21 @@
-<!-- <mat-grid-list cols="5">
-  <mat-grid-tile *ngFor="let product of allProducts">
-    <app-single-product [data]="product"></app-single-product>
-  </mat-grid-tile>
-</mat-grid-list> -->
-<app-single-product *ngFor="let product of allProducts" [data]="product"></app-single-product>
+<div class="row">
+    <form [formGroup]="searchForm" >
+      <mat-form-field>
+        <mat-select placeholder="Select Category" (selectionChange)="filterByCategory()" formControlName="selectedCategory" >
+          <mat-option value="0" >All</mat-option>
+          <mat-option *ngFor="let category of allCategory" [value]="category._id">
+            {{category.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="search-field">
+        <input matInput placeholder="search" formControlName="search" />
+      </mat-form-field>
+      <button mat-button><img src='https://cdn2.iconfinder.com/data/icons/media-and-navigation-buttons-square/512/Button_15-512.png' height="30" (click)="search()"/></button>
+      
+    </form>
+</div>
+
+<div class="row">
+  <app-single-product class="col-sm-3" *ngFor="let product of dataArray" [data]="product"></app-single-product>
+</div>

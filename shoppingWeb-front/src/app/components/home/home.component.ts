@@ -34,7 +34,7 @@ export class HomeComponent implements OnInit {
         this.loginAlert = null;
         this.userService.currentUser = data;
         this.cartService.getByUserId(data.id).subscribe((data) => {
-          this.userCart = data;
+          this.userCart = data[0];
         })
       }
     });
