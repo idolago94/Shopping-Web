@@ -20,7 +20,7 @@ export class CartComponent implements OnInit {
         this.getCartProducts(data[0]._id);
       }
     });
-    this.cartService.productAddedToCart.subscribe(() => {
+    this.cartService.cartNeedToUpdate.subscribe(() => {
       this.getCartProducts(this.cartService.openCart._id);
     })
   }

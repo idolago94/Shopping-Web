@@ -2,4 +2,5 @@
   <img [src]="productData.picture" height="40" />
   <b>{{ productData.name }}</b>
   <span> {{ productData.price | currency:'ILS' }} X {{ details.quantity }} = {{ productData.price*details.quantity | currency:'ILS' }}</span>
+  <button (click)="deleteCartProduct()" class="delete-btn" mat-button ><img src='https://freeiconshop.com/wp-content/uploads/edd/trash-var-outline.png' height="18" /></button>
 </mat-card>

@@ -44,7 +44,7 @@ export class SingleProductComponent implements OnInit {
           newProduct.quantity = newProduct.quantity + this.quantityForm.controls.quantity.value;
           this.cartProductService.updateCartProduct(newProduct._id, newProduct).subscribe((data) => {
             this.quantityForm.reset();
-            this.cartService.productAddedToCart.next();
+            this.cartService.cartNeedToUpdate.next();
           })
         }
         // product not exist in cart
@@ -56,7 +56,7 @@ export class SingleProductComponent implements OnInit {
           };
           this.cartProductService.addCartProduct(newCartProduct).subscribe((data) => {
             this.quantityForm.reset();
-            this.cartService.productAddedToCart.next();
+            this.cartService.cartNeedToUpdate.next();
           });
         }
       }
@@ -71,7 +71,7 @@ export class SingleProductComponent implements OnInit {
             cart_id: data._id
             };
           this.cartProductService.addCartProduct(newCartProduct).subscribe((data) => {
-            this.cartService.productAddedToCart.next();
+            this.cartService.cartNeedToUpdate.next();
           })
         })
         

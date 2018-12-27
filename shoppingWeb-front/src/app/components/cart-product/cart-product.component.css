@@ -1,0 +1,10 @@
+.delete-btn {
+    position: relative;
+    float: right;
+    right: 0;
+    height: 100% !important;
+}
+
+mat-card {
+    padding-right: 0; 
+}
