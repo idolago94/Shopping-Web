@@ -23,7 +23,7 @@ export class SingleProductComponent implements OnInit {
   ngOnInit() {
   }
 
-  open(content) {
+  openModal(content) {
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
       // click X or SAVE
       if(result=='save'){
@@ -33,6 +33,7 @@ export class SingleProductComponent implements OnInit {
   }
 
   addToCart() {
+    // check quantity value not 0
     if(this.quantityForm.controls.quantity.value>0){
       // open cart existing
       if(this.cartService.openCart){
@@ -42,6 +43,7 @@ export class SingleProductComponent implements OnInit {
         // product allready exist in cart
         if(newProduct) {
           newProduct.quantity = newProduct.quantity + this.quantityForm.controls.quantity.value;
+          newProduct.total_price = newProduct.quantity*this.data.price;
           this.cartProductService.updateCartProduct(newProduct._id, newProduct).subscribe((data) => {
             this.quantityForm.reset();
             this.cartService.cartNeedToUpdate.next();
@@ -52,7 +54,8 @@ export class SingleProductComponent implements OnInit {
           let newCartProduct = {
           product_id: this.data._id,
           quantity: this.quantityForm.controls.quantity.value,
-          cart_id: this.cartService.openCart._id
+          cart_id: this.cartService.openCart._id,
+          total_price: this.quantityForm.controls.quantity.value*this.data.price
           };
           this.cartProductService.addCartProduct(newCartProduct).subscribe((data) => {
             this.quantityForm.reset();
@@ -60,6 +63,7 @@ export class SingleProductComponent implements OnInit {
           });
         }
       }
+      
       // open cart not existing
       else {
         let newCart = { user_id: this.userService.currentUser.id, production_date: new Date().toLocaleDateString() };
@@ -68,7 +72,8 @@ export class SingleProductComponent implements OnInit {
           let newCartProduct = {
             product_id: this.data._id,
             quantity: this.quantityForm.controls.quantity.value,
-            cart_id: data._id
+            cart_id: data._id,
+            total_price: this.quantityForm.controls.quantity.value*this.data.price
             };
           this.cartProductService.addCartProduct(newCartProduct).subscribe((data) => {
             this.cartService.cartNeedToUpdate.next();
