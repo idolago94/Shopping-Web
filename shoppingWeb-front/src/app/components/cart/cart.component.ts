@@ -27,12 +27,21 @@ export class CartComponent implements OnInit {
     })
   }
 
-  // get al the products of the cart
+  // get all the products of the cart ( call after any update at the cart )
   getCartProducts(cartID) {
     this.cartProductService.getByCart(cartID).subscribe((data) => {
         this.cartProductService.openCartProducts = data;
         this.calculateTotalPrice();
     });
+  }
+  
+  // calculate the total price of the cart ( call after getCartProducts() )
+  calculateTotalPrice() {
+    this.cartTotalPrice = 0;
+    if(this.cartProductService.openCartProducts) {
+      this.cartProductService.openCartProducts.map((cartProduct) =>
+        this.cartTotalPrice+=cartProduct.total_price );
+    }
   }
 
   // delete the cart and all the products of the cart
@@ -50,11 +59,4 @@ export class CartComponent implements OnInit {
     this.calculateTotalPrice();
   }
 
-  calculateTotalPrice() {
-    this.cartTotalPrice = 0;
-    if(this.cartProductService.openCartProducts) {
-      this.cartProductService.openCartProducts.map((cartProduct) =>
-        this.cartTotalPrice+=cartProduct.total_price );
-    }
-  }
 }
