@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="row">
+    <app-cart class="preview-cart col-sm-5" [preview_mode]="true"></app-cart>
+    <div class="shipping-details col-sm-5">
+      <form [formGroup]="shippingDetails" >
+        <div>
+          <mat-form-field>
+            <input matInput placeholder="City" formControlName="city" (dblclick)="setValue('city')" />
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field>
+            <input matInput placeholder="Adress" formControlName="adress" (dblclick)="setValue('adress')" />
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field>
+            <input matInput [matDatepickerFilter]="myFilter" [matDatepicker]="picker" placeholder="Shipping Date" formControlName="delivery_date">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field>
+            <input matInput placeholder="Credit Card" formControlName="payment" />
+          </mat-form-field>
+        </div>
+        <button mat-button [disabled]="!shippingDetails.valid" (click)="placeOrder()" >Order</button>
+      </form>
+  </div>
+</div>
+</div>

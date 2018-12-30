@@ -16,6 +16,8 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatExpansionModule} from '@angular/material/expansion';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule} from '@angular/material';
 
 import { AppComponent } from './app.component';
 import { RegisterComponent } from './components/register/register.component';
@@ -28,6 +30,7 @@ import { SingleProductComponent } from './components/single-product/single-produ
 import { InvoiceComponent } from './components/invoice/invoice.component';
 import { LogoComponent } from './components/logo/logo.component';
 import { HeaderComponent } from './components/header/header.component';
+import { PreviewOrderComponent } from './components/preview-order/preview-order.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +44,8 @@ import { HeaderComponent } from './components/header/header.component';
     SingleProductComponent,
     InvoiceComponent,
     LogoComponent,
-    HeaderComponent
+    HeaderComponent,
+    PreviewOrderComponent
   ],
   imports: [
     BrowserModule,
@@ -61,6 +65,8 @@ import { HeaderComponent } from './components/header/header.component';
     MatTooltipModule,
     MatBadgeModule,
     MatExpansionModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
 
     ReactiveFormsModule,
     RouterModule.forRoot([
@@ -69,7 +75,8 @@ import { HeaderComponent } from './components/header/header.component';
       { path:"store", component: StoreComponent },
       { path:"cart", component: CartComponent },
       { path:"invoice", component: InvoiceComponent },
-      { path:"logo", component: LogoComponent }
+      { path:"logo", component: LogoComponent },
+      { path:"previeworder", component: PreviewOrderComponent }
     ])
   ],
   providers: [],

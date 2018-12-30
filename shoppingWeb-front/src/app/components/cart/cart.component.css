@@ -1,4 +1,10 @@
-.minimize-icon, .deleteAll-icon {
+.minimize-icon, .deleteAll-icon, .maximize-icon {
     float: right;
     margin-right: 7px;
+}
+
+.back-link {
+    float: right;
+    margin-right: 7px;
+    font-size: 14px;
 }

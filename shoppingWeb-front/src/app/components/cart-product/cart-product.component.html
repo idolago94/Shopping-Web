@@ -2,5 +2,5 @@
   <img [src]="productData.picture" height="40" />
   <b>{{ productData.name }}</b>
   <span> {{ productData.price | currency:'ILS' }} X {{ details.quantity }} = {{ details.total_price | currency:'ILS' }}</span>
-  <button matTooltip="Delete product" (click)="deleteCartProduct()" class="delete-btn" mat-button ><img src='https://freeiconshop.com/wp-content/uploads/edd/trash-var-outline.png' height="18" /></button>
+  <button matTooltip="Delete product" *ngIf="!this.preview_mode" (click)="deleteCartProduct()" class="delete-btn" mat-button ><img src='https://freeiconshop.com/wp-content/uploads/edd/trash-var-outline.png' height="18" /></button>
 </mat-card>

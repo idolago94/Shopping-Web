@@ -10,6 +10,7 @@ import { CartService } from 'src/app/services/cart.service';
 })
 export class CartProductComponent implements OnInit {
 
+  @Input() preview_mode:any;
   @Input() details:any;
   productData:any;
 
@@ -18,7 +19,7 @@ export class CartProductComponent implements OnInit {
   ngOnInit() {
     this.productService.getById(this.details.product_id).subscribe((data) => {
       this.productData = data;
-    })
+    });
   }
 
   deleteCartProduct() {

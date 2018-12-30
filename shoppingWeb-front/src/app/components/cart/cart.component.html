@@ -6,19 +6,22 @@
     <mat-card-title>
         <h3>
             My Cart
-            <img matTooltip="Delete all" *ngIf="this.cartService.openCart" class=deleteAll-icon src='https://cdn2.iconfinder.com/data/icons/shopping-e-commerce-2-1/32/Remove-All-Cart-delete-Trolley-512.png' (click)="deleteAllCart()" height="30" />
-            <img matTooltip="Minimize" *ngIf="!this.cartService.minimize" class="minimize-icon" src='https://cdn3.iconfinder.com/data/icons/line/36/subtract-512.png' (click)="this.cartService.minimize=true" height="30"/>
-            <img matTooltip="Minimize" *ngIf="this.cartService.minimize" class="minimize-icon" src='https://cdn1.iconfinder.com/data/icons/enter-exit-fullscreen-icons/100/exit-512.png' (click)="this.cartService.minimize=false" height="30"/>
+            <span *ngIf="!this.preview_mode">
+                <img matTooltip="Delete all" *ngIf="this.cartService.openCart" class=deleteAll-icon src='https://cdn2.iconfinder.com/data/icons/shopping-e-commerce-2-1/32/Remove-All-Cart-delete-Trolley-512.png' (click)="deleteAllCart()" height="30" />
+                <img matTooltip="Minimize" *ngIf="!this.cartService.minimize" class="minimize-icon" src='https://cdn3.iconfinder.com/data/icons/line/36/subtract-512.png' (click)="this.cartService.minimize=true" height="30"/>
+                <img matTooltip="Move to side" *ngIf="this.cartService.minimize" class="maximize-icon" src='https://cdn1.iconfinder.com/data/icons/education-set-7/512/arrow5-left-512.png' (click)="this.cartService.minimize=false" height="30"/>
+            </span>
+            <a class="back-link" *ngIf="this.preview_mode" href="/store" >Back to shop</a>
         </h3>
     </mat-card-title>
     <mat-card-content>
-        <app-cart-product *ngFor="let p of this.cartProductService.openCartProducts" [details]="p"></app-cart-product>
+        <app-cart-product *ngFor="let p of this.cartProductService.openCartProducts" [preview_mode]="preview_mode" [details]="p"></app-cart-product>
     </mat-card-content>
     <mat-card-footer>
         <h5>
            <b>Total price: </b>    
            <span>{{ cartTotalPrice | currency:'ILS' }}</span> 
-           <button mat_butoon (click)="router.navigate(['cart'])">Buy</button>
+           <button mat_butoon (click)="router.navigate(['previeworder'])" *ngIf="!this.preview_mode" >Order</button>
         </h5>
     </mat-card-footer>
 </mat-card>
