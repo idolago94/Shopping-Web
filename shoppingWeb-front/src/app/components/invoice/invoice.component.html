@@ -1,0 +1,4 @@
+<p *ngIf="this.cartService.openCart" >
+  invoice works!
+</p>
+<h1 *ngIf="!this.cartService.openCart" >Your Shopping Cart is empty <a href="/store">Start shopping now!</a></h1>

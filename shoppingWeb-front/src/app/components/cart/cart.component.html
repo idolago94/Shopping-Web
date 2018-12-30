@@ -14,6 +14,7 @@
         <h5>
            <b>Total price: </b>    
            <span>{{ cartTotalPrice | currency:'ILS' }}</span> 
+           <button mat_butoon (click)="router.navigate(['invoice'])">Buy</button>
         </h5>
     </mat-card-footer>
 </mat-card>

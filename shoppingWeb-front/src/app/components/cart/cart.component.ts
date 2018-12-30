@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CartService } from 'src/app/services/cart.service';
 import { UsersService } from 'src/app/services/users.service';
 import { CartProductService } from 'src/app/services/cart-product.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cart',
@@ -12,7 +13,7 @@ export class CartComponent implements OnInit {
 
   cartTotalPrice: number = 0;
 
-  constructor( private cartService:CartService, private userService:UsersService, private cartProductService:CartProductService ) { }
+  constructor( private cartService:CartService, private userService:UsersService, private cartProductService:CartProductService, private router:Router ) { }
 
   ngOnInit() {
     // check for a open cart of the user

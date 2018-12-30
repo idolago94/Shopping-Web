@@ -23,6 +23,7 @@ import { CartComponent } from './components/cart/cart.component';
 import { AllproductsComponent } from './components/allproducts/allproducts.component';
 import { CartProductComponent } from './components/cart-product/cart-product.component';
 import { SingleProductComponent } from './components/single-product/single-product.component';
+import { InvoiceComponent } from './components/invoice/invoice.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { SingleProductComponent } from './components/single-product/single-produ
     CartComponent,
     AllproductsComponent,
     CartProductComponent,
-    SingleProductComponent
+    SingleProductComponent,
+    InvoiceComponent
   ],
   imports: [
     BrowserModule,
@@ -56,7 +58,8 @@ import { SingleProductComponent } from './components/single-product/single-produ
     RouterModule.forRoot([
       { path:"", component: HomeComponent },
       { path:"register", component: RegisterComponent },
-      { path:"store", component: StoreComponent }
+      { path:"store", component: StoreComponent },
+      { path:"invoice", component: InvoiceComponent }
     ])
   ],
   providers: [],
