@@ -51,11 +51,9 @@ export class CartComponent implements OnInit {
   async deleteAllCart() {
     await this.cartProductService.openCartProducts.map((cartProduct) => {
       this.cartProductService.deleteCartProduct(cartProduct._id).subscribe((data) => {
-
       });
     });
     await this.cartService.deleteCart(this.cartService.openCart._id).subscribe((data)=>{
-
     });
     this.cartService.openCart = null;
     this.cartProductService.openCartProducts = null;

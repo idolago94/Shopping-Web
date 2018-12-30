@@ -25,8 +25,21 @@
             <input matInput placeholder="Credit Card" formControlName="payment" />
           </mat-form-field>
         </div>
-        <button mat-button [disabled]="!shippingDetails.valid" (click)="placeOrder()" >Order</button>
+        <button mat-button [disabled]="!shippingDetails.valid" (click)="placeOrder(content)" >Order</button>
       </form>
   </div>
 </div>
 </div>
+
+<!-- modal html -->
+<ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Your order has been sent!</h4>
+    </div>
+    <div class="modal-body">
+      <h6>For download the invoice <a>click here.</a></h6>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close()">confirm</button>
+    </div>
+</ng-template>

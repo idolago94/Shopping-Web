@@ -24,6 +24,7 @@ export class SingleProductComponent implements OnInit {
   }
 
   openModal(content) {
+    console.log(content);
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
       // click X or SAVE
       if(result=='save'){

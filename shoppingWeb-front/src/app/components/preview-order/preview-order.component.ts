@@ -4,6 +4,8 @@ import { UsersService } from 'src/app/services/users.service';
 import { OrdersService } from 'src/app/services/orders.service';
 import { CartService } from 'src/app/services/cart.service';
 import { CartProductService } from 'src/app/services/cart-product.service';
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-preview-order',
@@ -19,13 +21,12 @@ export class PreviewOrderComponent implements OnInit {
     payment: new FormControl(null, [Validators.required])
   });
 
-  constructor( private userService:UsersService, private orderService:OrdersService, private cartService:CartService, private cartProductService:CartProductService ) { }
+  constructor( private userService:UsersService, private orderService:OrdersService, private cartService:CartService, private cartProductService:CartProductService, private modalService: NgbModal, private router:Router ) { }
 
   // disable dates who have more than 3 delivery at the same day
   myFilter = (d: Date): boolean => {
     const day = d.toLocaleDateString();
     let counter=0;
-    debugger;
     this.arrayDayDelivary.map((orderDate) => {
       if(orderDate==day){
         counter++;
@@ -63,8 +64,7 @@ export class PreviewOrderComponent implements OnInit {
   }
 
   // add new order to the database
-  placeOrder() {
-    debugger;
+  placeOrder(contentModal) {
     let newOrder = Object.assign(
       this.shippingDetails.value,
       {user_id: this.userService.currentUser.id},
@@ -74,9 +74,36 @@ export class PreviewOrderComponent implements OnInit {
     );
     newOrder.delivery_date = newOrder.delivery_date.toLocaleDateString();
     this.orderService.addOrder(newOrder).subscribe((data) => {
-      // order added to database
+      this.openModal(contentModal);
     });
+  }
 
+  openModal(content) {
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then(() => {
+      this.deleteAllCart();
+      this.router.navigate(['']);
+    }, () => {
+      this.deleteAllCart();
+      this.router.navigate(['']);
+    });
+  }
+
+  async deleteAllCart() {
+    // await this.cartProductService.openCartProducts.map((cartProduct) => {
+    //   this.cartProductService.deleteCartProduct(cartProduct._id).subscribe((data) => {
+    //   });
+    // });
+    // await this.cartService.deleteCart(this.cartService.openCart._id).subscribe((data)=>{
+    // });
+    debugger;
+    await this.cartProductService.getByCart(this.cartService.openCart._id).subscribe((data) => {
+      data.map((cartProduct) => {
+        this.cartProductService.deleteCartProduct(cartProduct._id).subscribe(() => {});
+      });
+    });
+    await this.cartService.deleteCart(this.cartService.openCart._id).subscribe(()=>{});
+    this.cartService.openCart = null;
+    this.cartProductService.openCartProducts = null;
   }
 
 }
