@@ -18,7 +18,7 @@ export class PreviewOrderComponent implements OnInit {
     city: new FormControl(null, [Validators.required]),
     adress: new FormControl(null, [Validators.required]),
     delivery_date: new FormControl(null, [Validators.required]),
-    payment: new FormControl(null, [Validators.required])
+    payment: new FormControl(null, [Validators.required, Validators.maxLength(4), Validators.minLength(4)])
   });
 
   constructor( private userService:UsersService, private orderService:OrdersService, private cartService:CartService, private cartProductService:CartProductService, private modalService: NgbModal, private router:Router ) { }
