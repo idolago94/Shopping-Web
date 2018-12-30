@@ -31,6 +31,6 @@ router.put('/:id',async function(req, res, next) {
 router.delete('/:id',async function(req, res, next) {
     let response= await cartProduct.findByIdAndDelete(req.params.id);
     res.json(response);
-});
+});z
 
 module.exports = router;

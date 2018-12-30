@@ -10,6 +10,8 @@ import { CartProductService } from 'src/app/services/cart-product.service';
 })
 export class CartComponent implements OnInit {
 
+  cartTotalPrice: number = 0;
+
   constructor( private cartService:CartService, private userService:UsersService, private cartProductService:CartProductService ) { }
 
   ngOnInit() {
@@ -25,10 +27,34 @@ export class CartComponent implements OnInit {
     })
   }
 
+  // get al the products of the cart
   getCartProducts(cartID) {
     this.cartProductService.getByCart(cartID).subscribe((data) => {
         this.cartProductService.openCartProducts = data;
-      })
+        this.calculateTotalPrice();
+    });
   }
 
+  // delete the cart and all the products of the cart
+  async deleteAllCart() {
+    await this.cartProductService.openCartProducts.map((cartProduct) => {
+      this.cartProductService.deleteCartProduct(cartProduct._id).subscribe((data) => {
+
+      });
+    });
+    await this.cartService.deleteCart(this.cartService.openCart._id).subscribe((data)=>{
+
+    });
+    this.cartService.openCart = null;
+    this.cartProductService.openCartProducts = null;
+    this.calculateTotalPrice();
+  }
+
+  calculateTotalPrice() {
+    this.cartTotalPrice = 0;
+    if(this.cartProductService.openCartProducts) {
+      this.cartProductService.openCartProducts.map((cartProduct) =>
+        this.cartTotalPrice+=cartProduct.total_price );
+    }
+  }
 }

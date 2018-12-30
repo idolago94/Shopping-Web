@@ -13,6 +13,7 @@ import {MatCardModule} from '@angular/material/card';
 import { HttpClientModule } from '@angular/common/http';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 import { AppComponent } from './app.component';
 import { RegisterComponent } from './components/register/register.component';
@@ -49,6 +50,7 @@ import { SingleProductComponent } from './components/single-product/single-produ
     MatSelectModule,
     MatCardModule,
     MatDialogModule,
+    MatTooltipModule,
 
     ReactiveFormsModule,
     RouterModule.forRoot([

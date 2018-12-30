@@ -1,3 +1,4 @@
-.minimize-icon {
+.minimize-icon, .deleteAll-icon {
     float: right;
+    margin-right: 7px;
 }

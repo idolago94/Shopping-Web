@@ -1,5 +1,19 @@
-<h3>
-    My Cart
-    <img class="minimize-icon" src='https://cdn3.iconfinder.com/data/icons/line/36/subtract-512.png' (click)="this.cartService.minimize=true" height="30"/>
-</h3>
-<app-cart-product *ngFor="let p of this.cartProductService.openCartProducts" [details]="p"></app-cart-product>
+
+<mat-card>
+    <mat-card-title>
+        <h3>
+            My Cart
+            <img matTooltip="Delete all" class=deleteAll-icon src='https://cdn2.iconfinder.com/data/icons/shopping-e-commerce-2-1/32/Remove-All-Cart-delete-Trolley-512.png' (click)="deleteAllCart()" height="30" />
+            <img matTooltip="Minimize" class="minimize-icon" src='https://cdn3.iconfinder.com/data/icons/line/36/subtract-512.png' (click)="this.cartService.minimize=true" height="30"/>
+        </h3>
+    </mat-card-title>
+    <mat-card-content>
+        <app-cart-product *ngFor="let p of this.cartProductService.openCartProducts" [details]="p"></app-cart-product>
+    </mat-card-content>
+    <mat-card-footer>
+        <h5>
+           <b>Total price: </b>    
+           <span>{{ cartTotalPrice | currency:'ILS' }}</span> 
+        </h5>
+    </mat-card-footer>
+</mat-card>
