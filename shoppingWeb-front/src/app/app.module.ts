@@ -14,6 +14,8 @@ import { HttpClientModule } from '@angular/common/http';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatBadgeModule} from '@angular/material/badge';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 import { AppComponent } from './app.component';
 import { RegisterComponent } from './components/register/register.component';
@@ -24,6 +26,8 @@ import { AllproductsComponent } from './components/allproducts/allproducts.compo
 import { CartProductComponent } from './components/cart-product/cart-product.component';
 import { SingleProductComponent } from './components/single-product/single-product.component';
 import { InvoiceComponent } from './components/invoice/invoice.component';
+import { LogoComponent } from './components/logo/logo.component';
+import { HeaderComponent } from './components/header/header.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +39,9 @@ import { InvoiceComponent } from './components/invoice/invoice.component';
     AllproductsComponent,
     CartProductComponent,
     SingleProductComponent,
-    InvoiceComponent
+    InvoiceComponent,
+    LogoComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
@@ -53,13 +59,17 @@ import { InvoiceComponent } from './components/invoice/invoice.component';
     MatCardModule,
     MatDialogModule,
     MatTooltipModule,
+    MatBadgeModule,
+    MatExpansionModule,
 
     ReactiveFormsModule,
     RouterModule.forRoot([
       { path:"", component: HomeComponent },
       { path:"register", component: RegisterComponent },
       { path:"store", component: StoreComponent },
-      { path:"invoice", component: InvoiceComponent }
+      { path:"cart", component: CartComponent },
+      { path:"invoice", component: InvoiceComponent },
+      { path:"logo", component: LogoComponent }
     ])
   ],
   providers: [],

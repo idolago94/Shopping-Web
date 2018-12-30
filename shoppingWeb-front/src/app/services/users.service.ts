@@ -48,6 +48,7 @@ export class UsersService {
   }
 
   logout(): Observable<any> {
+    this.currentUser = null;
     return <Observable<any>> this.http.get( this.url+'/logout' );
   }
 

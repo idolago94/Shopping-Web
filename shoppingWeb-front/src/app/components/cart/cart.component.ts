@@ -40,8 +40,9 @@ export class CartComponent implements OnInit {
   calculateTotalPrice() {
     this.cartTotalPrice = 0;
     if(this.cartProductService.openCartProducts) {
-      this.cartProductService.openCartProducts.map((cartProduct) =>
-        this.cartTotalPrice+=cartProduct.total_price );
+      this.cartProductService.openCartProducts.map((cartProduct) => {
+        this.cartTotalPrice+=cartProduct.total_price;
+      });
     }
   }
 

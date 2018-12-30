@@ -1,0 +1,47 @@
+div.header {
+    height: 50px;
+    width: 100%;
+    background-color: royalblue;
+}
+
+.logo {
+    float: left;
+    display: inline;
+}
+
+span.user-btn {
+    float: right;
+    height: 100%;
+    width: 140px;
+    padding-left: 10px;
+    margin-left: 8px;
+    border-left: 2px solid gray;
+}
+
+span.user-btn:hover, span.cart-btn:hover {
+    background-color: rgba(128, 128, 128, 0.253);
+}
+
+span.cart-btn {
+    float: right;
+    height: 90%;
+    margin-right: 6px;
+    box-sizing: border-box;
+}
+
+.user-btn > * , div.hi-user > * , .cart-btn > * {
+    padding: 0;
+    margin: 0;
+}
+
+.cart-btn > label {
+    margin-top: 12px;
+}
+
+mat-expansion-panel-header {
+    float: right;
+}
+
+mat-expansion-panel {
+    background-color: royalblue;
+}

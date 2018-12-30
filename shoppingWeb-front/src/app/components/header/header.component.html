@@ -1,0 +1,30 @@
+<div class="header">
+  <!-- logo -->
+  <app-logo class="logo" [height]="50" (click)="this.router.navigate([''])" ></app-logo>
+  <!-- user button (logout option) -->
+  <span class="row user-btn" *ngIf="this.userService.currentUser">
+    <img class="col-sm-4" src="https://unity3d.com/profiles/unity3d/themes/unity/images/ui/icons/other/user-default128x128.png" height="50" />
+    <div class="col-sm-6 hi-user text-center">
+      <p>Hi, {{ this.userService.currentUser.firstName }}</p>
+      <button mat-button (click)="doLogout()" >Logout</button>
+    </div>
+  </span>
+
+  <span class="cart-btn" *ngIf="this.cartService.minimize && this.userService.currentUser">
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <label matBadge="!">
+              <img src="https://cdn3.iconfinder.com/data/icons/meanicons-4/512/meanicons_54-512.png" height="35" />
+            </label>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <app-cart></app-cart>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </span>
+
+
+
+</div>
