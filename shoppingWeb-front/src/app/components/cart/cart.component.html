@@ -1,7 +1,4 @@
-<h1 *ngIf="!this.cartService.openCart" >
-        Your Shopping Cart is empty <a href="store">Start shopping now!</a>
-</h1>
-
+<!-- cart is not empty -->
 <mat-card *ngIf="this.cartService.openCart" >
     <mat-card-title>
         <h3>
@@ -24,4 +21,22 @@
            <button mat_butoon (click)="router.navigate(['previeworder'])" *ngIf="!this.preview_mode" >Order</button>
         </h5>
     </mat-card-footer>
+</mat-card>
+
+<!-- cart is empty -->
+<mat-card *ngIf="!this.cartService.openCart" >
+    <mat-card-title>
+        <h3>
+            My Cart
+            <span *ngIf="!this.preview_mode">
+                <img matTooltip="Minimize" *ngIf="!this.cartService.minimize" class="minimize-icon" src='https://cdn3.iconfinder.com/data/icons/line/36/subtract-512.png' (click)="this.cartService.minimize=true" height="30"/>
+                <img matTooltip="Move to side" *ngIf="this.cartService.minimize" class="maximize-icon" src='https://cdn1.iconfinder.com/data/icons/education-set-7/512/arrow5-left-512.png' (click)="this.cartService.minimize=false" height="30"/>
+            </span>
+        </h3>
+    </mat-card-title>
+    <mat-card-content>
+        <h4>
+            Your Shopping Cart is empty <a href="store">Start shopping now!</a>
+        </h4>
+    </mat-card-content>
 </mat-card>
