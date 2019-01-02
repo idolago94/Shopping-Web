@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +16,8 @@ export class ProductService {
   url:string = 'http://localhost:3000/products';
 
   constructor( private http:HttpClient ) { }
+
+  productUpdate = new Subject();
   
   getAll():Observable<any> {
     return <Observable<any>> this.http.get(this.url);

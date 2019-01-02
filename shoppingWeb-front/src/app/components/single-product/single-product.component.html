@@ -1,10 +1,10 @@
 <mat-card>
-  <img mat-card-image [src]="data.picture">
+  <img mat-card-image [src]="data.picture" height="80">
   <mat-card-content>
     <b>{{ data.name }}</b>
     <p>{{ data.price | currency:'ILS' }}</p>
   </mat-card-content>
-  <mat-card-actions>
+  <mat-card-actions *ngIf="this.userService.currentUser.authority!='admin'">
     <button mat-button (click)="openModal(content)" >ADD TO CART</button>
   </mat-card-actions>
 </mat-card>

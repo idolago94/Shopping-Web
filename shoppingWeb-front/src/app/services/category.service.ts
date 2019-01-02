@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +16,8 @@ export class CategoryService {
   url:string = 'http://localhost:3000/categories';
 
   constructor( private http:HttpClient ) { }
+
+  newCategoryAdded = new Subject();
 
   getAll():Observable<any> {
     return <Observable<any>> this.http.get(this.url);

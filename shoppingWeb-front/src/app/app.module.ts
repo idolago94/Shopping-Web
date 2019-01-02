@@ -19,6 +19,8 @@ import {MatBadgeModule} from '@angular/material/badge';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material';
+import {MatIconModule} from '@angular/material/icon';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 import { AppComponent } from './app.component';
 import { RegisterComponent } from './components/register/register.component';
@@ -33,6 +35,7 @@ import { LogoComponent } from './components/logo/logo.component';
 import { HeaderComponent } from './components/header/header.component';
 import { PreviewOrderComponent } from './components/preview-order/preview-order.component';
 import { MilkPipe } from './pipes/milk.pipe';
+import { AdminComponent } from './components/admin/admin.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +51,8 @@ import { MilkPipe } from './pipes/milk.pipe';
     LogoComponent,
     HeaderComponent,
     PreviewOrderComponent,
-    MilkPipe
+    MilkPipe,
+    AdminComponent
   ],
   imports: [
     BrowserModule,
@@ -71,6 +75,8 @@ import { MilkPipe } from './pipes/milk.pipe';
     MatExpansionModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatIconModule,
+    MatSnackBarModule,
 
     ReactiveFormsModule,
     RouterModule.forRoot([
@@ -80,7 +86,8 @@ import { MilkPipe } from './pipes/milk.pipe';
       { path:"cart", component: CartComponent },
       { path:"invoice", component: InvoiceComponent },
       { path:"logo", component: LogoComponent },
-      { path:"previeworder", component: PreviewOrderComponent }
+      { path:"previeworder", component: PreviewOrderComponent },
+      { path:"adminstrator", component: AdminComponent }
     ])
   ],
   providers: [],

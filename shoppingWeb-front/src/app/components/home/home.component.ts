@@ -22,7 +22,7 @@ export class HomeComponent implements OnInit {
   constructor( private userService:UsersService, private router: Router, private cartService:CartService ) { }
 
   ngOnInit() {
-
+    
   }
 
   login() {
@@ -33,6 +33,9 @@ export class HomeComponent implements OnInit {
       else {
         this.loginAlert = null;
         this.userService.currentUser = data;
+        if(this.userService.currentUser.authority=='admin'){
+          this.router.navigate(['adminstrator']);
+        }
         this.cartService.getByUserId(data.id).subscribe((data) => {
           this.userCart = data[0];
         })
