@@ -1,34 +1,37 @@
 <div class="row" >
   <div class="col-sm-4" id="product-view" *ngIf="this.showView" >
-    <form [formGroup]="productForm">
-      <div>
-        <mat-form-field>
-          <input matInput placeholder="Name" formControlName="name" />
-        </mat-form-field>
-      </div>
-      <div>
-        <mat-form-field>
-          <mat-select  formControlName="category_id" placeholder="Select Category">
-            <mat-option *ngFor="let category of allCategories" [value]="category._id" >
-              {{category.name}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-        <button mat-button (click)="openModal(content)" >+</button>
-      </div>
-      <div>
-        <mat-form-field>
-          <input matInput placeholder="Price" formControlName="price" type="number" />
-        </mat-form-field>
-      </div>
-      <div>
-        <mat-form-field>
-          <input matInput placeholder="Picture" formControlName="picture" />
-        </mat-form-field>
-      </div>
-      <button mat-button (click)="updateProduct('delete')">DELETE</button>
-      <button mat-button (click)="updateProduct('save')">SAVE</button>
-    </form>
+    <mat-card>
+      <form [formGroup]="productForm">
+        <div>
+          <mat-form-field>
+            <input matInput placeholder="Name" formControlName="name" />
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field>
+            <mat-select  formControlName="category_id" placeholder="Select Category">
+              <mat-option *ngFor="let category of allCategories" [value]="category._id" >
+                {{category.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <button mat-button (click)="openModal(content)" >+</button>
+        </div>
+        <div>
+          <mat-form-field>
+            <input matInput placeholder="Price" formControlName="price" type="number" />
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field>
+            <input matInput placeholder="Picture" formControlName="picture" />
+          </mat-form-field>
+        </div>
+        <button mat-button (click)="updateProduct('delete')">DELETE</button>
+        <button mat-button (click)="updateProduct('save')">SAVE</button>
+      </form>
+    </mat-card>
+    
   </div>
   <div class="col-sm-8 row">
     <form [formGroup]="newProduct" >
