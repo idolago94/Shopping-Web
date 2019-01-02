@@ -12,13 +12,16 @@
         </h3>
     </mat-card-title>
     <mat-card-content>
-        <app-cart-product *ngFor="let p of this.cartProductService.openCartProducts" [preview_mode]="preview_mode" [details]="p"></app-cart-product>
+        <mat-form-field *ngIf="this.preview_mode">
+            <input matInput placeholder="Search" [(ngModel)]="search" />
+        </mat-form-field>
+        <app-cart-product *ngFor="let p of this.cartProductService.openCartProducts" [preview_mode]="preview_mode" [mark]="search" [details]="p"></app-cart-product>
     </mat-card-content>
     <mat-card-footer>
         <h5>
            <b>Total price: </b>    
            <span>{{ cartTotalPrice | currency:'ILS' }}</span> 
-           <button mat_butoon (click)="router.navigate(['previeworder'])" *ngIf="!this.preview_mode" >Order</button>
+           <button mat-butoon (click)="router.navigate(['previeworder'])" *ngIf="!this.preview_mode" >Order</button>
         </h5>
     </mat-card-footer>
 </mat-card>
@@ -40,3 +43,5 @@
         </h4>
     </mat-card-content>
 </mat-card>
+
+<mark></mark>

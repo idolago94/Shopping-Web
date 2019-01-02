@@ -12,6 +12,7 @@ export class CartProductComponent implements OnInit {
 
   @Input() preview_mode:any;
   @Input() details:any;
+  @Input() mark:string;
   productData:any;
 
   constructor( private productService:ProductService, private cartProductService:CartProductService, private cartService:CartService ) { }

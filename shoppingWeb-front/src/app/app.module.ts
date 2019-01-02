@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatStepperModule} from '@angular/material/stepper';
@@ -31,6 +32,7 @@ import { InvoiceComponent } from './components/invoice/invoice.component';
 import { LogoComponent } from './components/logo/logo.component';
 import { HeaderComponent } from './components/header/header.component';
 import { PreviewOrderComponent } from './components/preview-order/preview-order.component';
+import { MilkPipe } from './pipes/milk.pipe';
 
 @NgModule({
   declarations: [
@@ -45,12 +47,14 @@ import { PreviewOrderComponent } from './components/preview-order/preview-order.
     InvoiceComponent,
     LogoComponent,
     HeaderComponent,
-    PreviewOrderComponent
+    PreviewOrderComponent,
+    MilkPipe
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     NgbModule,
+    FormsModule,
 
     // angular material components
     BrowserAnimationsModule,
