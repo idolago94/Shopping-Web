@@ -31,6 +31,26 @@
     </form>
   </div>
   <div class="col-sm-8 row">
+    <form [formGroup]="newProduct" >
+        <mat-form-field>
+          <input matInput placeholder="Name" formControlName="name" />
+        </mat-form-field>
+        <mat-form-field>
+            <mat-select  formControlName="category_id" placeholder="Select Category">
+              <mat-option *ngFor="let category of allCategories" [value]="category._id" >
+                {{category.name}}
+              </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <button mat-button (click)="openModal(content)" >+</button>
+        <mat-form-field>
+          <input matInput placeholder="Price" formControlName="price" type="number" />
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Picture" formControlName="picture" />
+        </mat-form-field>
+        <button mat-button (click)="addNewProduct()">ADD NEW PRODUCT</button>
+    </form>
     <app-single-product class="col-sm-3" *ngFor="let product of allProducts" [data]="product" (click)="showProduct(product)"></app-single-product>
   </div>
 </div>

@@ -26,6 +26,13 @@ export class AdminComponent implements OnInit {
     picture: new FormControl(null, [Validators.required]),
   });
 
+  newProduct: FormGroup = new FormGroup({
+    name: new FormControl(null, [Validators.required]),
+    category_id: new FormControl(null, [Validators.required]),
+    price: new FormControl(null, [Validators.required]),
+    picture: new FormControl(null, [Validators.required]),
+  });
+
   newCategory: FormGroup = new FormGroup({
     name: new FormControl(null, [Validators.required])
   });
@@ -107,4 +114,12 @@ export class AdminComponent implements OnInit {
         break;
     }
   }
+
+  addNewProduct() {
+    this.productService.addProduct(this.newProduct.value).subscribe((data) => {
+      this.newProduct.reset();
+      this.productService.productUpdate.next();
+    })
+  }
+
 }
