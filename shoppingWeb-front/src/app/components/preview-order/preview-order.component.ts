@@ -6,6 +6,8 @@ import { CartService } from 'src/app/services/cart.service';
 import { CartProductService } from 'src/app/services/cart-product.service';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
+import { saveAs } from 'file-saver';
+import { ProductService } from 'src/app/services/product.service';
 
 @Component({
   selector: 'app-preview-order',
@@ -21,7 +23,9 @@ export class PreviewOrderComponent implements OnInit {
     payment: new FormControl(null, [Validators.required, Validators.maxLength(4), Validators.minLength(4)])
   });
 
-  constructor( private userService:UsersService, private orderService:OrdersService, private cartService:CartService, private cartProductService:CartProductService, private modalService: NgbModal, private router:Router ) { }
+  invoiceFile:any;
+
+  constructor( private userService:UsersService, private orderService:OrdersService, private cartService:CartService, private cartProductService:CartProductService, private modalService: NgbModal, private router:Router, private productService:ProductService ) { }
 
   // disable dates who have more than 3 delivery at the same day
   myFilter = (d: Date): boolean => {
@@ -73,7 +77,8 @@ export class PreviewOrderComponent implements OnInit {
       {reservation_date: new Date().toLocaleDateString()}
     );
     newOrder.delivery_date = newOrder.delivery_date.toLocaleDateString();
-    this.orderService.addOrder(newOrder).subscribe((data) => {
+    this.orderService.addOrder(newOrder).subscribe((orderData) => {
+      this.invoiceFile = new Blob([this.buildInvoiceString(orderData)], { type: 'text/plain;charset=utf-8' });
       this.openModal(contentModal);
     });
   }
@@ -104,6 +109,15 @@ export class PreviewOrderComponent implements OnInit {
     await this.cartService.deleteCart(this.cartService.openCart._id).subscribe(()=>{});
     this.cartService.openCart = null;
     this.cartProductService.openCartProducts = null;
+  }
+
+  buildInvoiceString(orderDetails): string {
+    // return the text that will insert into the text file
+    return '';
+  }
+
+  downloadInvoice() {
+    saveAs(this.invoiceFile, 'invoice.txt');
   }
 
 }

@@ -31,13 +31,13 @@
 </div>
 </div>
 
-<!-- modal html -->
+<!-- order success modal html -->
 <ng-template #content let-modal>
     <div class="modal-header">
       <h4 class="modal-title" id="modal-basic-title">Your order has been sent!</h4>
     </div>
     <div class="modal-body">
-      <h6>For download the invoice <a>click here.</a></h6>
+      <h6>For download the invoice <a (click)="downloadInvoice()">click here.</a></h6>
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-outline-dark" (click)="modal.close()">confirm</button>
