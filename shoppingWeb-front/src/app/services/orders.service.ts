@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +16,8 @@ export class OrdersService {
   url:string = 'http://localhost:3000/orders';
 
   constructor( private http:HttpClient ) { }
+
+  orderSubmitted = new Subject();
 
   getAll():Observable<any> {
     return <Observable<any>> this.http.get(this.url);

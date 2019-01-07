@@ -80,6 +80,7 @@ export class PreviewOrderComponent implements OnInit {
     );
     newOrder.delivery_date = newOrder.delivery_date.toLocaleDateString();
     this.orderService.addOrder(newOrder).subscribe((orderData) => {
+      this.orderService.orderSubmitted.next();
       this.getInvoiceData(orderData).then((invoiceData) => {
         this.invoiceFile = new Blob([`${invoiceData}`], { type: 'text/plain;charset=utf-8' });
         this.openModal(contentModal);

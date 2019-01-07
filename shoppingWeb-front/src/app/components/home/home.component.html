@@ -1,6 +1,7 @@
-<mat-grid-list cols="3">
-  <mat-grid-tile>
-    <button class="form-control" mat-raised-button color="accent" [disabled]="!this.userService.currentUser" (click)="router.navigate(['store'])" >Start Shopping</button>
+<div class="row text-center">
+  <div class="col-sm-4">
+    <button *ngIf="!userCart" class="form-control" mat-raised-button color="accent" [disabled]="!this.userService.currentUser" (click)="router.navigate(['store'])" >Start Shopping</button>
+    <button *ngIf="userCart" class="form-control" mat-raised-button color="accent" [disabled]="!this.userService.currentUser" (click)="router.navigate(['store'])" >Resume Shopping</button>
     <div *ngIf="!this.userService.currentUser" >
       <ngb-alert *ngIf="loginAlert" type="danger" [dismissible]="false" >{{ loginAlert }}</ngb-alert>
       <form [formGroup]="loginForm" method="POST" action="/login">
@@ -24,11 +25,18 @@
       </h4>
       <b (click)="logout()">log out</b>
     </div>
-  </mat-grid-tile>
-  <mat-grid-tile>
+  </div>
+  <div class="col-sm-4">
     ABOUT 
-  </mat-grid-tile>
-  <mat-grid-tile>
-    C
-  </mat-grid-tile>
-</mat-grid-list>
+  </div>
+  <div class="col-sm-4">
+    <p>We have {{ numberProducts }} available products</p>
+    <p>Our customer allready submitted {{ numberOrders }} orders</p>
+    <div *ngIf="this.userService.currentUser">
+      <h5 class="text-left">Notifications:</h5>
+      <p *ngIf="userCart">You have open cart from {{ userCart.production_date }}</p>
+      <p *ngIf="lastOrder && !userCart">Your last order was on {{ lastOrder.reservation_date }}</p>
+      <p *ngIf="!lastOrder && !userCart">Welcome to your first purchase</p>
+    </div>
+  </div>
+</div>

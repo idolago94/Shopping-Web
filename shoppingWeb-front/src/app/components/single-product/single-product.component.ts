@@ -69,6 +69,7 @@ export class SingleProductComponent implements OnInit {
       else {
         let newCart = { user_id: this.userService.currentUser.id, production_date: new Date().toLocaleDateString() };
         this.cartService.addCart(newCart).subscribe((data) => {
+          this.cartService.newCartOpened.next();
           this.cartService.openCart = data;
           let newCartProduct = {
             product_id: this.data._id,

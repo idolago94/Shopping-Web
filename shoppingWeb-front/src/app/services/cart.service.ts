@@ -22,6 +22,7 @@ export class CartService {
   constructor( private http:HttpClient ) { }
 
   cartNeedToUpdate = new Subject();
+  newCartOpened = new Subject();
 
   getAll():Observable<any> {
     return <Observable<any>> this.http.get(this.url);

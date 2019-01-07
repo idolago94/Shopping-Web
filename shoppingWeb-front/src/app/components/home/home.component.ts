@@ -3,6 +3,9 @@ import { FormGroup, Validators, FormControl, AbstractControl} from '@angular/for
 import { UsersService } from 'src/app/services/users.service';
 import {Router} from "@angular/router"; 
 import { CartService } from 'src/app/services/cart.service';
+import { ProductService } from 'src/app/services/product.service';
+import { OrdersService } from 'src/app/services/orders.service';
+import { CartProductService } from 'src/app/services/cart-product.service';
 
 @Component({
   selector: 'app-home',
@@ -18,11 +21,26 @@ export class HomeComponent implements OnInit {
 
   loginAlert: string;
   userCart: any;
+  lastOrder: any;
 
-  constructor( private userService:UsersService, private router: Router, private cartService:CartService ) { }
+  numberProducts: number;
+  numberOrders: number;
+
+  constructor( private userService:UsersService, private router: Router, private cartService:CartService, private productService:ProductService, private orderService:OrdersService, private cartProductService:CartProductService ) { }
 
   ngOnInit() {
-    
+    this.productService.getAll().subscribe((data) => {
+      this.numberProducts = data.length;
+    });
+    this.orderService.getAll().subscribe((data) => {
+      this.numberOrders = data.length;
+    });
+    this.orderService.orderSubmitted.subscribe(() => {
+      this.chackLastOrder(this.userService.currentUser.id);
+    });
+    this.cartService.newCartOpened.subscribe(() => {
+      this.checkOpenCart(this.userService.currentUser.id);
+    });
   }
 
   login() {
@@ -36,10 +54,21 @@ export class HomeComponent implements OnInit {
         if(this.userService.currentUser.authority=='admin'){
           this.router.navigate(['adminstrator']);
         }
-        this.cartService.getByUserId(data.id).subscribe((data) => {
-          this.userCart = data[0];
-        })
+        this.checkOpenCart(data.id);
+        this.chackLastOrder(data.id);
       }
+    });
+  }
+
+  checkOpenCart(userID) {
+    this.cartService.getByUserId(userID).subscribe((data) => {
+      this.userCart = data[0];
+    });
+  }
+
+  chackLastOrder(userID) {
+    this.orderService.getByUserId(userID).subscribe((data) => {
+      this.lastOrder = data[data.length-1];
     });
   }
 

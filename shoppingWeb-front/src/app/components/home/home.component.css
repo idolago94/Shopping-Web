@@ -1,4 +1,8 @@
-mat-grid-tile {
+div.col-sm-4 {
     border: 2px dotted royalblue;
     border-radius: 10px;
+}
+
+div.row {
+    height: 500px;
 }

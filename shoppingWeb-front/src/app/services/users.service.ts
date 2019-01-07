@@ -15,18 +15,7 @@ export class UsersService {
 
   url:string = 'http://localhost:3000/users';
   
-  // after develop delete the init
-  currentUser:any = {
-    "_id": "5c20cc4abbd37b41617283b6",
-    "firstName": "b",
-    "lastName": "c",
-    "username": "idolago94@gmail.com",
-    "id": "312546534",
-    "authority": "user",
-    "city": "Tel Aviv",
-    "adress": "a",
-    "__v": 0
-};
+  currentUser:any;
 
   constructor( private http:HttpClient ) { }
 
