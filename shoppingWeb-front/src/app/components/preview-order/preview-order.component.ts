@@ -8,6 +8,8 @@ import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
 import { saveAs } from 'file-saver';
 import { ProductService } from 'src/app/services/product.service';
+import { async } from 'q';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-preview-order',
@@ -78,8 +80,11 @@ export class PreviewOrderComponent implements OnInit {
     );
     newOrder.delivery_date = newOrder.delivery_date.toLocaleDateString();
     this.orderService.addOrder(newOrder).subscribe((orderData) => {
-      this.invoiceFile = new Blob([this.buildInvoiceString(orderData)], { type: 'text/plain;charset=utf-8' });
-      this.openModal(contentModal);
+      this.getInvoiceData(orderData).then((invoiceData) => {
+        this.invoiceFile = new Blob([`${invoiceData}`], { type: 'text/plain;charset=utf-8' });
+        this.openModal(contentModal);
+      })
+
     });
   }
 
@@ -94,13 +99,6 @@ export class PreviewOrderComponent implements OnInit {
   }
 
   async deleteAllCart() {
-    // await this.cartProductService.openCartProducts.map((cartProduct) => {
-    //   this.cartProductService.deleteCartProduct(cartProduct._id).subscribe((data) => {
-    //   });
-    // });
-    // await this.cartService.deleteCart(this.cartService.openCart._id).subscribe((data)=>{
-    // });
-    debugger;
     await this.cartProductService.getByCart(this.cartService.openCart._id).subscribe((data) => {
       data.map((cartProduct) => {
         this.cartProductService.deleteCartProduct(cartProduct._id).subscribe(() => {});
@@ -111,9 +109,21 @@ export class PreviewOrderComponent implements OnInit {
     this.cartProductService.openCartProducts = null;
   }
 
-  buildInvoiceString(orderDetails): string {
-    // return the text that will insert into the text file
-    return '';
+  getInvoiceData(orderData) {
+    return new Promise((resolve, reject) => {
+      let str = '';
+      this.cartProductService.getByCart(orderData.cart_id).subscribe(async(cartProducts) => {
+        for(let i=0;i<cartProducts.length;i++) {
+          await this.productService.getById(cartProducts[i].product_id).subscribe((product) => {
+            str += product.name + " " + product.price + "₪ X" + cartProducts[i].quantity + " =" + cartProducts[i].total_price + "₪ \r\n";
+            if(i==cartProducts.length-1){
+              str += "\r\n Total Price: " + orderData.total_price + "₪ ";
+              resolve(str);
+            }
+          });
+        }
+      });
+    })
   }
 
   downloadInvoice() {
