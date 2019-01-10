@@ -1,8 +1,15 @@
 div.col-sm-4 {
+    position: relative;
     border: 2px dotted royalblue;
     border-radius: 10px;
 }
 
 div.row {
     height: 500px;
+}
+
+mat-card.notifications {
+    width: 100%;
+    position: relative;
+    top: 50%;
 }

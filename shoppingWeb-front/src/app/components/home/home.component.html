@@ -32,11 +32,11 @@
   <div class="col-sm-4">
     <p>We have {{ numberProducts }} available products</p>
     <p>Our customer allready submitted {{ numberOrders }} orders</p>
-    <div *ngIf="this.userService.currentUser">
+    <mat-card class="notifications" *ngIf="this.userService.currentUser">
       <h5 class="text-left">Notifications:</h5>
       <p *ngIf="userCart">You have open cart from {{ userCart.production_date }}</p>
       <p *ngIf="lastOrder && !userCart">Your last order was on {{ lastOrder.reservation_date }}</p>
       <p *ngIf="!lastOrder && !userCart">Welcome to your first purchase</p>
-    </div>
+    </mat-card>
   </div>
 </div>

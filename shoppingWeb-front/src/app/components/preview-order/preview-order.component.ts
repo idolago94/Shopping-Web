@@ -29,7 +29,7 @@ export class PreviewOrderComponent implements OnInit {
 
   constructor( private userService:UsersService, private orderService:OrdersService, private cartService:CartService, private cartProductService:CartProductService, private modalService: NgbModal, private router:Router, private productService:ProductService ) { }
 
-  // disable dates who have more than 3 delivery at the same day
+  // disable dates who have more than 3 delivery at the same day or before today
   myFilter = (d: Date): boolean => {
     const day = d.toLocaleDateString();
     let counter=0;
@@ -38,7 +38,7 @@ export class PreviewOrderComponent implements OnInit {
         counter++;
       }
     });
-    if(counter>=3){
+    if(counter>=3 || d.getDate()<new Date().getDate()){
       return false;
     }
     return true;
@@ -116,7 +116,7 @@ export class PreviewOrderComponent implements OnInit {
       this.cartProductService.getByCart(orderData.cart_id).subscribe(async(cartProducts) => {
         for(let i=0;i<cartProducts.length;i++) {
           await this.productService.getById(cartProducts[i].product_id).subscribe((product) => {
-            str += product.name + " " + product.price + "₪ X" + cartProducts[i].quantity + " =" + cartProducts[i].total_price + "₪ \r\n";
+            str += product.name + " " + product.price + "₪ X" + cartProducts[i].quantity + " = " + cartProducts[i].total_price + "₪ \r\n";
             if(i==cartProducts.length-1){
               str += "\r\n Total Price: " + orderData.total_price + "₪ ";
               resolve(str);
