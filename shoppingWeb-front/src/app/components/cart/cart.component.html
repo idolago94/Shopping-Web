@@ -8,7 +8,7 @@
                 <img matTooltip="Minimize" *ngIf="!this.cartService.minimize" class="minimize-icon" src='https://cdn3.iconfinder.com/data/icons/line/36/subtract-512.png' (click)="this.cartService.minimize=true" height="30"/>
                 <img matTooltip="Move to side" *ngIf="this.cartService.minimize" class="maximize-icon" src='https://cdn1.iconfinder.com/data/icons/education-set-7/512/arrow5-left-512.png' (click)="this.cartService.minimize=false" height="30"/>
             </span>
-            <a class="back-link" *ngIf="this.preview_mode" href="/store" >Back to shop</a>
+            <a class="back-link" *ngIf="this.preview_mode" (click)="router.navigate(['store'])" >Back to shop</a>
         </h3>
     </mat-card-title>
     <mat-card-content>
