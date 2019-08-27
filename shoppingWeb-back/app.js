@@ -1,23 +1,24 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
 const mongoose = require('mongoose');
-var passport = require('passport');
-var LocalStrategy = require('passport-local').Strategy; // set the passport strategy
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy; // set the passport strategy
+const cors = require('cors');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var categoryRouter = require('./routes/categoriesRouter');
-var productRouter = require('./routes/productsRouter');
-var cartsRouter = require('./routes/cartsRouter');
-var cartProductsRouter = require('./routes/cartProductsRouter');
-var ordersRouter = require('./routes/ordersRouter');
+const indexRouter = require('./routes/index');
+const usersRouter = require('./routes/users');
+const categoryRouter = require('./routes/categoriesRouter');
+const productRouter = require('./routes/productsRouter');
+const cartsRouter = require('./routes/cartsRouter');
+const cartProductsRouter = require('./routes/cartProductsRouter');
+const ordersRouter = require('./routes/ordersRouter');
 
-var app = express();
+const app = express();
 
-var Users = require('./models/users-model');
+const Users = require('./models/users-model');
 passport.use(new LocalStrategy(Users.authenticate()));
 passport.serializeUser(Users.serializeUser());
 passport.deserializeUser(Users.deserializeUser());
@@ -65,5 +66,7 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+app.use(cors());
 
 module.exports = app;
